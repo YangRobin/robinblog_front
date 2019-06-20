@@ -1,0 +1,53 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js dev
+
+PATH: 
+  C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Docker\Docker\Resources\bin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Program Files\nodejs\;C:\Program Files\Java\jdk1.8.0_131\bin;C:\Program Files\Java\jdk1.8.0_131\jre\bin;D:\software\Git\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32\wbem;F:\asdk\tools​​​​​​​;F:\asdk\platform-tools;C:\Windows\System32\OpenSSH;C:\Users\Administrator\.cargo\bin;C:\Users\Administrator\AppData\Roaming\npm;E:\software\flutter\bin;D:\software\Git\bin;E:\software\IntelliJ IDEA 2019.1.3\bin;;D:\software\gcc\bin;C:\Users\Administrator\AppData\Local\Programs\Microsoft VS Code\bin;D:\software\gcc\bin;D:\software\Microsoft VS Code\bin;C:\Program Files\Docker\Docker\resources\bin;
+
+Yarn version: 
+  1.16.0
+
+Node version: 
+  10.15.3
+
+Platform: 
+  win32 x64
+
+Trace: 
+  SyntaxError: F:\worddir\robinblog\package.json: Unexpected token / in JSON at position 181
+      at JSON.parse (<anonymous>)
+      at C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:304:30)
+      at C:\Users\Administrator\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:315:13
+
+npm manifest: 
+  {
+    "name": "robinblog",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "dev": "webpack-dev-server --config config/webpack.prod.config.js",
+      // "build": "webpack --config config/webpack.prod.config.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "clean-webpack-plugin": "^3.0.0",
+      "html-webpack-plugin": "^3.2.0",
+      "webpack": "^4.34.0",
+      "webpack-cli": "^3.3.4",
+      "webpack-dev-server": "^3.7.2",
+      "webpack-html-plugin": "^0.1.1",
+      "webpack-merge": "^4.2.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
