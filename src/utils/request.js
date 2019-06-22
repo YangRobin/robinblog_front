@@ -1,30 +1,23 @@
 
 import axios from 'axios';
 
-const get = (url, params) => {
-	return axios.get(url, {
-		url: url,
-		headers: {
-			'Content-Type': 'application/json; charset=UTF-8'
-		},
-		params,
-	}).then(res => {
-		return res.data;
-	})
-}
+const get = (url, params) => axios.get(url, {
+  url,
+  headers: {
+    'Content-Type': 'application/json; charset=UTF-8',
+  },
+  params,
+}).then(res => res.data);
 
 const post = (url, data) => {
-	axios.post(url, JSON.stringify(data), {
-		headers: {
-			'Content-Type': 'application/json; charset=UTF-8'
-		},
-	}).then(res => {
-		return res.data;
-	})
-}
+  axios.post(url, JSON.stringify(data), {
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  }).then(res => res.data);
+};
 
 export default {
-	get,
-	post
-}
-
+  get,
+  post,
+};

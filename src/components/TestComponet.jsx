@@ -1,44 +1,12 @@
-
 import React from 'react';
-import { useState, useReducer, useContext } from 'react';
-let TestComponent = (props) => {
 
-	let [num, setNum] = useState(0);
+const TestComponent = (props) => {
 
-	let obj = useContext({
-		name: 'robin',
-		age: 33,
-		addr: "hangzhou"
-	})
-
-
-	const [count, dispath] = useReducer((state, action) => {
-		if (action === 'add') {
-			return state + 1;
-		}
-		if (action === 'reduce') {
-			return state <= 0 ? 0 : state -=1;;
-		}
-		return state;
-	}, 0);
-
-	let multiply = () => {
-		setNum(num += 1)
-	}
-	let reduce = () => {
-		setNum(num <= 0 ? 0 : num -= 1);
-	}
-
-	return (<div>
-		<h1> num： {num}</h1>
-		<button onClick={multiply}>add</button>
-		<button onClick={reduce}>reduce</button>
-		<div>
-			<h1>{count}</h1>
-			<button onClick={() => { dispath("add") }}>add</button>
-			<button onClick={() => { dispath("reduce") }}>reduce</button>
-		</div>
-	</div>)
-}
+  return (
+    <div>
+      <h1>{props}</h1>
+    </div>
+  );
+};
 
 export default TestComponent;
