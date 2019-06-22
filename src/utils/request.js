@@ -1,18 +1,30 @@
 
 import axios from 'axios';
 
-
-let get = (url, param) => {
-    return axios.get(url, {
-        method: "GET",
-        headers: {},
-        params: param,
-    })
+const get = (url, params) => {
+	return axios.get(url, {
+		url: url,
+		headers: {
+			'Content-Type': 'application/json; charset=UTF-8'
+		},
+		params,
+	}).then(res => {
+		return res.data;
+	})
 }
 
-let post = (url, data) => {
-    return axios.post(url, data, {
-        headers: {}
-    })
+const post = (url, data) => {
+	axios.post(url, JSON.stringify(data), {
+		headers: {
+			'Content-Type': 'application/json; charset=UTF-8'
+		},
+	}).then(res => {
+		return res.data;
+	})
 }
-export default axios;
+
+export default {
+	get,
+	post
+}
+
