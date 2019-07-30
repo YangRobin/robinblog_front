@@ -55,18 +55,19 @@ module.exports = {
     page: true,
   },
   rules: {
+    'no-console': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/destructuring-assignment': [1, "always", { "ignoreClassFields": false }],
     'react/jsx-wrap-multilines': 0,
     'react/prop-types': 0,
     'react/forbid-prop-types': 0,
     'react/jsx-one-expression-per-line': 0,
-    'import/no-unresolved': [2, { ignore: ['^@/', '^umi/'] }],
+    'import/no-unresolved': [2, { ignore: ['config/', '^config/'] }],
     'import/no-extraneous-dependencies': [
       2,
       {
         optionalDependencies: true,
-        devDependencies: ['**/tests/**.js', '/mock/**/**.js', '**/**.test.js'],
+        devDependencies: ['/config/**.js', '**/tests/**.js', '/mock/**/**.js', '**/**.test.js'],
       },
     ],
     'import/no-cycle': 0,

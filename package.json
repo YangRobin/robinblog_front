@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --config config/webpack.dev.config.js --open",
+    "fix": "// --history-api-fallback 选项可以解决BrowserRouter 刷新404问题",
+    "dev": "webpack-dev-server --config config/webpack.dev.config.js --open --history-api-fallback",
     "build": "webpack --config  config/webpack.prod.config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ext .js,.jsx ./src",
@@ -44,10 +45,12 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.13.0",
     "extract-text-webpack-plugin": "^3.0.2",
+    "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
     "postcss-loader": "^3.0.0",
+    "progress-bar-webpack-plugin": "^1.12.1",
     "react-hot-loader": "^4.11.1",
     "style-loader": "^0.23.1",
     "url-loader": "^2.0.0",
@@ -59,7 +62,9 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "moment": "^2.24.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1"
   }
 }

@@ -1,10 +1,10 @@
 import React from 'react';
 
-const TestComponent = (props) => {
+const TestComponent = () => {
 
   return (
     <div>
-      <h1>{props}</h1>
+      <h1>robin</h1>
     </div>
   );
 };

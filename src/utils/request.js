@@ -20,4 +20,4 @@ const post = (url, data) => {
 export default {
   get,
   post,
-};
+}

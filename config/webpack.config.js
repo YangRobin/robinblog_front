@@ -1,9 +1,11 @@
 const path = require('path');
 const fs = require('fs');
-const htmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { HotModuleReplacementPlugin } = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 /**
  * 多入口配置
  */
@@ -11,7 +13,7 @@ const getEntries = (pagePath) => {
   const dirs = fs.readdirSync(pagePath);
   const entries = {};
   dirs.forEach((i) => {
-    entries[i] = `${pagePath}/${i}/index.js`;
+    entries[i] = `${pagePath}/${i}/index.jsx`;
   });
   return entries;
 };
@@ -22,10 +24,12 @@ const config = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].bundle.js',
+    // publicPath:'../src/resource'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.less'],
   },
+  stats: 'errors-only',
   module: { // 要打包的第三方模块
     rules: [
       {
@@ -47,11 +51,31 @@ const config = {
         },
       },
       {
-        test: /\.(css|less)$/,
+        test: /\.(css)$/,
         use: [
           'style-loader',
           {
             loader: 'css-loader',
+            /***VERY IMPORTANT** */
+            // options: {  css不能开启模块化 只能用css-loader 
+            //   modules: true, // 是否开启css 模块化
+            //   importLoaders: 1,
+            // },
+          }]
+      },
+      {
+        test: /\.(less)$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true, // 是否开启css 模块化
+              importLoaders: 1,
+            },
+          },
+          {
+            loader: 'less-loader',
             options: {
               modules: true, // 是否开启css 模块化
               importLoaders: 1,
@@ -69,13 +93,35 @@ const config = {
           },
         ],
       },
-      { test: /\.jpg|png|gif|jpeg$/, use: 'url-loader' }, // 处理图片的规则
+      { test: /\.jpg|png|gif|svg|eot|ttf|woff|woff2|jpeg$/, use: 'url-loader' }, // 处理图片的规则
     ],
   },
   plugins: [
     new CleanWebpackPlugin({
       verbose: true,
     }), // 每次打包构建，清理dist目录里面的缓存文件,
+    new FriendlyErrorsWebpackPlugin({
+      compilationSuccessInfo: {
+        messages: ['You application is running here http://localhost:3000'],
+        notes: ['Some additional notes to be displayed upon successful compilation']
+      },
+      onErrors(severity, errors) {
+        // You can listen to errors transformed and prioritized by the plugin
+        // severity can be 'error' or 'warning'
+      },
+      // should the console be cleared between each compilation?
+      // default is true
+      clearConsole: true,
+
+      // add formatters and transformers (see below)
+      additionalFormatters: [],
+      additionalTransformers: []
+    }),
+    // 进度条
+    // new ProgressBarPlugin({
+    //   // format: `  build [:bar] ${chalk.green.bold(':percent')} (:elapsed seconds)`,
+    //   clear: false
+    // }),
     new HotModuleReplacementPlugin(),
   ],
   externals: {
@@ -91,7 +137,7 @@ const config = {
 const generateHtmlByPages = (pagePath) => {
   const pages = fs.readdirSync(pagePath);
   pages.forEach((i) => {
-    config.plugins.push(new htmlWebpackPlugin({
+    config.plugins.push(new HtmlWebpackPlugin({
       title: i,
       filename: `${i}.html`,
       chunks: [i],

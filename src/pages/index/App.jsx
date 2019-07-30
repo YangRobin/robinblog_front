@@ -1,44 +1,43 @@
-/* eslint-disable react/button-has-type */
 
-import React, { useState } from 'react';
-import TestComponent from '../../components/TestComponet';
-import { Button, Wrapper, Row } from '../../components/robin';
-import request from '../../utils/request';
+import React from 'react';
+import { HashRouter as Router, Route } from 'react-router-dom';
+import Header from '../../common/Header'
+import Footer from '../../common/Footer'
+import { Wrapper, Row, Col } from '../../components/robin';
+import routes from './router';
+import '../../resource/iconfont.css';
+import Menu from './components/Menu';
 
-const { get } = request;
-// const { Button } = Robin;
 
-const App = (props) => {
-  const [name, setName] = useState('robin');
-  console.log(props)
-  get('https://api.myjson.com/bins/ms891').then((res) => {
-    console.log(res);
-  });
-  const changeName = () => {
-    const tempName = name === 'robin' ? 'test' : 'robin';
-    setName(tempName);
-  };
+const App = () => {
   return (
-    <div>
-      <Wrapper>
-        <Row span={3}>
-          <div>test</div>
-          <div>tset1</div>
-        </Row>
-        <Button type="primary">查看</Button>
-        <Button type="danger">tishi</Button>
-        <Button type="info">info</Button>
-        <h1>前端架构</h1>
-        <div>
-          <TestComponent count={0} />
-        </div>
-        <h1>{name}</h1>
-        <button onClick={changeName}>change name</button>
-        <button>
-          test we
-        </button>
-      </Wrapper>
-    </div>
+    <Router>
+      <div>
+        <Header />
+        <Wrapper>
+          <Row>
+            <Col span={4}>
+              <Menu routes={routes} />
+            </Col>
+            <Col span={16}>
+              <main style={{ margin: '10px' }}>
+                {
+                  routes.map(i => {
+                    return <Route key={i.path} path={i.path} exact={i.exact} component={i.component} />
+                  })
+                }
+              </main>
+            </Col>
+            <Col span={4}> </Col>
+          </Row>
+        </Wrapper>
+        {/** <Footer /> */}
+      </div>
+    </Router>
   );
 };
+
+
+
+
 export default App;
