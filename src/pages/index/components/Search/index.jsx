@@ -7,8 +7,7 @@ import { Row, Col, Icon } from '../../../../components/robin';
 import style from './style';
 import Pager from '../../../../components/Pager';
 
-const Search = props => {
-  console.log(props)
+const Search = () => {
   const [state, setstate] = useState({ articleList: [], count: {}, activeIndex: 0, page: 1 })
   const typeCount = list => {
     const arr = {};
@@ -90,11 +89,12 @@ const Search = props => {
             })
           }
         </ul>
-        <Pager total={50} pageSize={5} page={state.page} pageChange={pageChange} />
+      
       </div>
       <ul>
         {renderList(state.articleList)}
       </ul>
+      <Pager total={50} pageSize={5} page={state.page} pageChange={pageChange} />
     </div>
   )
 }

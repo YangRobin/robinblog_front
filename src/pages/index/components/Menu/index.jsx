@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom';
 import { Icon } from '../../../../components/robin';
-
 import style from './style.less';
 
 const Menu = (props) => {

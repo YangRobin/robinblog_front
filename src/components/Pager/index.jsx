@@ -9,7 +9,7 @@ const Pager = props => {
     const totalpage = (total % pageSize) >= 0 ? parseInt(total / pageSize, 0) + 1 : parseInt(total / pageSize, 0);
     const html = [];
     for (let i = 1; i <= totalpage; i += 1) {
-      html.push(<li onClick={() => { pageChange(i) }} className={page === i ? style.activePage : ''}>{i}</li>)
+      html.push(<li key={i} onClick={() => { pageChange(i) }} className={page === i ? style.activePage : ''}>{i}</li>)
     }
     return html;
   }

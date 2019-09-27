@@ -1,39 +1,45 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import Header from '../../common/Header'
-import Footer from '../../common/Footer'
-import { Wrapper, Row, Col } from '../../components/robin';
+// import { Wrapper, Row, Col } from '../../components/robin';
 import routes from './router';
 import '../../resource/iconfont.css';
 import Menu from './components/Menu';
-
+import CommonContext from './commonContext';
+import style from './app.less';
 
 const App = () => {
+  const [state, setState] = useState({
+    search: 'query'
+  })
+
   return (
-    <Router>
-      <div>
-        <Header />
-        <Wrapper>
-          <Row>
-            <Col span={4}>
+    <CommonContext.Provider value={{ state, setState }}>
+      <Router>
+        <div>
+          <Header />
+          <main className={style.mainWrapper}>
+            <div className={style.left}>
               <Menu routes={routes} />
-            </Col>
-            <Col span={16}>
-              <main style={{ margin: '10px' }}>
+            </div>
+            <div className={style.right}>
+              <main>
                 {
                   routes.map(i => {
                     return <Route key={i.path} path={i.path} exact={i.exact} component={i.component} />
                   })
                 }
               </main>
-            </Col>
-            <Col span={4}> </Col>
-          </Row>
-        </Wrapper>
-        {/** <Footer /> */}
-      </div>
-    </Router>
+            </div>
+          </main>
+          {/**
+            
+           <Footer /> */}
+        </div>
+      </Router>
+    </CommonContext.Provider>
+
   );
 };
 
